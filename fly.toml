@@ -1,0 +1,17 @@
+app = "buildkite-agent"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[[mounts]]
+source = "data"
+destination = "/data"
+
+[env]
+  TINI_SUBREAPER = "1"
+  BUILDKITE_AGENT_TAGS="queue=build-fly"
+  BUILDKITE_BUILD_PATH = "/data/buildkite_builds"
+  DOCKER_REPOSITORY="registry.internal:5000"
+
+[experimental]
+  auto_rollback = true
